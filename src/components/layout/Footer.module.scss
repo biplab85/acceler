@@ -1,0 +1,152 @@
+@use 'sass:color';
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.footer {
+  background-color: var(--primary);
+  color: rgba(#fff, 0.85);
+  padding: $space-3xl 0 $space-lg;
+}
+
+.container {
+  @include container;
+}
+
+.grid {
+  display: grid;
+  gap: $space-2xl;
+  grid-template-columns: 1fr;
+
+  @include respond-to('tablet') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('desktop') {
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    gap: $space-3xl;
+  }
+}
+
+// ─── BRAND COLUMN ───────────────────────────────────────
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.mission {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(#fff, 0.6);
+  max-width: 280px;
+}
+
+.socials {
+  display: flex;
+  gap: $space-md;
+  margin-top: $space-sm;
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  border: 1px solid rgba(#fff, 0.15);
+  color: rgba(#fff, 0.7);
+  font-size: 16px;
+  transition: all $transition-base;
+
+  &:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+}
+
+// ─── COLUMNS ────────────────────────────────────────────
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.columnTitle {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  list-style: none;
+}
+
+.footerLink {
+  font-size: 14px;
+  color: rgba(#fff, 0.6);
+  transition: color $transition-base;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.contactItem {
+  font-size: 14px;
+  color: rgba(#fff, 0.6);
+}
+
+.contactCta {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: $space-sm;
+  transition: color $transition-base;
+
+  &:hover {
+    color: color.adjust($accent, $lightness: 10%);
+  }
+}
+
+// ─── BOTTOM BAR ─────────────────────────────────────────
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $space-2xl;
+  padding-top: $space-lg;
+  border-top: 1px solid rgba(#fff, 0.1);
+}
+
+.copyright {
+  font-size: 13px;
+  color: rgba(#fff, 0.4);
+}
+
+.backToTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  border: 1px solid rgba(#fff, 0.2);
+  color: rgba(#fff, 0.6);
+  font-size: 16px;
+  transition: all $transition-base;
+
+  &:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+}

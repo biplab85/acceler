@@ -1,0 +1,137 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.button {
+  @include button-base;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.02em;
+  z-index: 1;
+
+  // Shine sweep on hover (shared by all variants)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(#fff, 0.15) 50%,
+      transparent 100%
+    );
+    transition: left 0.5s ease;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    left: 120%;
+  }
+}
+
+// ─── PRIMARY — gradient bg, lift + glow on hover ────────
+.primary {
+  background: linear-gradient(135deg, $accent 0%, $accent-hover 100%);
+  color: #fff;
+  padding: 15px 36px;
+  border-radius: $radius-lg;
+  box-shadow: 0 4px 15px rgba($accent, 0.25);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 8px 25px rgba($accent, 0.35),
+      0 0 0 4px rgba($accent, 0.08);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($accent, 0.3);
+  }
+
+  @include respond-to('desktop') {
+    padding: 16px 40px;
+  }
+}
+
+// ─── SECONDARY — solid dark, subtle lift ────────────────
+.secondary {
+  background: linear-gradient(135deg, $primary 0%, $primary-light 100%);
+  color: #fff;
+  padding: 15px 36px;
+  border-radius: $radius-lg;
+  box-shadow: 0 4px 15px rgba($primary, 0.2);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 8px 25px rgba($primary, 0.3),
+      0 0 0 4px rgba($primary, 0.06);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  @include respond-to('desktop') {
+    padding: 16px 40px;
+  }
+}
+
+// ─── GHOST — border with fill-in animation on hover ─────
+.ghost {
+  background-color: transparent;
+  color: var(--primary);
+  padding: 15px 36px;
+  border: 2px solid var(--primary);
+  border-radius: $radius-lg;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 2px 8px rgba($primary, 0.06);
+
+  // Override the shine sweep — use a fill sweep instead
+  &::before {
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba($primary, 0.06) 50%,
+      transparent 100%
+    );
+  }
+
+  // Fill-in background layer
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--primary);
+    border-radius: inherit;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #fff;
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba($primary, 0.15);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  @include respond-to('desktop') {
+    padding: 16px 40px;
+  }
+}

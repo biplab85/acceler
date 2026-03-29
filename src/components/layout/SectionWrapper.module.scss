@@ -1,0 +1,57 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.section {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+// ─── BACKGROUNDS ────────────────────────────────────────
+.bg-default {
+  background-color: var(--surface);
+}
+
+.bg-alt {
+  background-color: var(--surface-alt);
+}
+
+.bg-warm {
+  background-color: var(--surface-warm);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+// ─── PADDING VARIANTS ───────────────────────────────────
+.pad-sm {
+  @include section-pad('sm');
+}
+
+.pad-md {
+  @include section-pad('md');
+}
+
+.pad-lg {
+  @include section-pad('lg');
+}
+
+// ─── CONTAINER ──────────────────────────────────────────
+.container {
+  @include container;
+}
+
+// ─── ANIMATION ──────────────────────────────────────────
+.animated {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

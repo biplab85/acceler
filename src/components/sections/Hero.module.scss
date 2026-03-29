@@ -1,0 +1,772 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/typography' as *;
+@use '@/styles/breakpoints' as *;
+
+// ═══════════════════════════════════════════════════════
+// HERO — FULL VIEWPORT, SOLID GRADIENT BACKGROUND
+// ═══════════════════════════════════════════════════════
+
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 $space-3xl;
+  background: linear-gradient(160deg, #e8eff6 0%, #dce6f0 35%, #d0dfee 70%, #c5d8ea 100%);
+  cursor: none; // hide default cursor on hero
+
+  @include respond-to('desktop') {
+    padding: 0;
+  }
+
+  // Restore cursor on interactive elements
+  a, button {
+    cursor: pointer;
+  }
+}
+
+// ─── PREMIUM CURSOR: outer ring + inner dot ─────────────
+.cursorRing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid rgba($accent, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+  mix-blend-mode: screen;
+
+  box-shadow: 0 0 15px rgba($accent, 0.12), inset 0 0 15px rgba($accent, 0.06);
+
+  @include below('tablet') {
+    display: none;
+  }
+}
+
+.cursorDot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 51;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+
+  @include below('tablet') {
+    display: none;
+  }
+}
+
+// ─── FULL-SECTION SVG BACKGROUND ────────────────────────
+.bgLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// Large animated gradient orb — top right
+.bgBlob1 {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  top: -300px;
+  right: -250px;
+  animation: blobFloat1 22s ease-in-out infinite;
+
+  @include below('tablet') {
+    width: 500px;
+    height: 500px;
+    top: -150px;
+    right: -150px;
+  }
+}
+
+// Second orb — bottom left, orange tint
+.bgBlob2 {
+  position: absolute;
+  width: 750px;
+  height: 750px;
+  bottom: -300px;
+  left: -250px;
+  animation: blobFloat2 28s ease-in-out infinite;
+
+  @include below('tablet') {
+    width: 400px;
+    height: 400px;
+    bottom: -180px;
+    left: -120px;
+  }
+}
+
+// Third orb — center, very subtle
+.bgBlob3 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: blobFloat3 30s ease-in-out infinite;
+
+  @include below('tablet') {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+// Dot grid pattern overlay
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+}
+
+// Top-down gradient vignette for depth
+.bgGradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 25% 50%, rgba($accent, 0.05), transparent 70%),
+    radial-gradient(ellipse 50% 70% at 80% 20%, rgba($primary, 0.04), transparent 60%),
+    linear-gradient(180deg, rgba(#fff, 0.15) 0%, transparent 30%, transparent 70%, rgba($primary, 0.03) 100%);
+}
+
+// Diagonal line accent
+.bgLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba($primary, 0.04) 30%, rgba($accent, 0.12) 50%, rgba($primary, 0.04) 70%, transparent 100%);
+}
+
+@keyframes blobFloat1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(40px, -30px) rotate(6deg) scale(1.04); }
+  50% { transform: translate(-20px, 35px) rotate(-4deg) scale(0.96); }
+  75% { transform: translate(25px, 15px) rotate(3deg) scale(1.02); }
+}
+
+@keyframes blobFloat2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate(-30px, 20px) rotate(-5deg) scale(1.05); }
+  66% { transform: translate(25px, -25px) rotate(6deg) scale(0.95); }
+}
+
+@keyframes blobFloat3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.15); }
+}
+
+// ─── REALISTIC CITYSCAPE ────────────────────────────────
+.skylineSvg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 280px;
+  opacity: 0;
+  animation: skylineRise 1.5s ease-out 0.4s forwards;
+
+  @include respond-to('desktop') {
+    height: 300px;
+  }
+
+  @include below('tablet') {
+    height: 140px;
+    opacity: 0;
+  }
+}
+
+@keyframes skylineRise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
+// ─── CONTINUOUS ANIMATED LINES ──────────────────────────
+.animLine {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+
+  // ── HORIZONTAL lines ──
+  &[data-direction='h'] {
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($primary, 0.04) 20%,
+      rgba($primary, 0.04) 80%,
+      transparent 100%
+    );
+    overflow: hidden;
+
+    // Traveling light pulse
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -30%;
+      width: 30%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba($accent, 0.25),
+        rgba($accent, 0.5),
+        rgba($accent, 0.25),
+        transparent
+      );
+      animation: lineSlideH 8s linear infinite;
+    }
+
+    // Stagger each line
+    &:nth-child(5) { // 1st horizontal (index after orbs+grid+gradient)
+      &::after { animation-delay: 0s; animation-duration: 7s; }
+    }
+    &:nth-child(6) {
+      &::after { animation-delay: -2s; animation-duration: 9s; }
+    }
+    &:nth-child(7) {
+      &::after { animation-delay: -4.5s; animation-duration: 11s; }
+    }
+    &:nth-child(8) {
+      &::after { animation-delay: -1s; animation-duration: 8s; }
+    }
+  }
+
+  // ── VERTICAL lines ──
+  &[data-direction='v'] {
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba($primary, 0.035) 20%,
+      rgba($primary, 0.035) 80%,
+      transparent 100%
+    );
+    overflow: hidden;
+
+    // Traveling light pulse
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -30%;
+      height: 30%;
+      width: 100%;
+      background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(#0ea5e9, 0.2),
+        rgba(#0ea5e9, 0.45),
+        rgba(#0ea5e9, 0.2),
+        transparent
+      );
+      animation: lineSlideV 10s linear infinite;
+    }
+
+    // Stagger each line
+    &:nth-child(9) {
+      &::after { animation-delay: 0s; animation-duration: 9s; }
+    }
+    &:nth-child(10) {
+      &::after { animation-delay: -3s; animation-duration: 12s; }
+    }
+    &:nth-child(11) {
+      &::after { animation-delay: -6s; animation-duration: 10s; }
+    }
+    &:nth-child(12) {
+      &::after { animation-delay: -1.5s; animation-duration: 11s; }
+    }
+  }
+}
+
+@keyframes lineSlideH {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+@keyframes lineSlideV {
+  0% { top: -30%; }
+  100% { top: 100%; }
+}
+
+// ─── CONTAINER ──────────────────────────────────────────
+.container {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+  position: relative;
+  z-index: 1;
+
+  @include respond-to('desktop') {
+    flex-direction: row;
+    align-items: center;
+    gap: $space-3xl;
+    min-height: 100vh;
+    padding-top: 80px;
+    padding-bottom: $space-2xl;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// TEXT COLUMN — 50% (white text on dark bg)
+// ═══════════════════════════════════════════════════════
+
+.textCol {
+  flex: 1;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @include respond-to('desktop') {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+// ─── LABEL BADGE ────────────────────────────────────────
+.labelBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: 8px 20px;
+  background: rgba($accent, 0.12);
+  border: 1px solid rgba($accent, 0.2);
+  border-radius: $radius-full;
+  margin-bottom: $space-xl;
+
+  span {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+}
+
+.labelIcon {
+  font-size: 16px;
+  color: var(--accent);
+}
+
+// ─── HEADING ────────────────────────────────────────────
+.heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+  margin-bottom: $space-lg;
+  max-width: 620px;
+  font-size: 40px;
+
+  @include respond-to('tablet') {
+    font-size: 50px;
+  }
+
+  @include respond-to('wide') {
+    font-size: 58px;
+  }
+}
+
+.headingAccent {
+  color: var(--accent);
+  position: relative;
+  display: inline-block;
+
+  // Hand-drawn wavy alpona-style underline
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: -4%;
+    width: 108%;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M0 12 C8 6, 16 4, 24 8 S40 16, 48 10 S64 2, 72 8 S88 18, 96 10 S112 2, 120 8 S136 16, 144 10 S160 4, 168 8 S184 18, 192 10 S208 2, 216 8 S232 16, 240 10 S256 4, 264 8 S280 16, 300 12' fill='none' stroke='#{svg-color($accent)}' stroke-width='2.8' stroke-linecap='round' opacity='0.5'/%3E%3Cpath d='M2 14 C12 8, 20 5, 30 10 S48 18, 58 11 S76 3, 86 10 S104 19, 114 11 S132 3, 142 10 S160 18, 170 11 S188 4, 198 10 S216 18, 226 11 S244 3, 254 10 S272 17, 298 13' fill='none' stroke='#{svg-color($accent)}' stroke-width='2' stroke-linecap='round' opacity='0.3'/%3E%3Ccircle cx='12' cy='10' r='1.5' fill='#{svg-color($accent)}' opacity='0.35'/%3E%3Ccircle cx='78' cy='7' r='1.2' fill='#{svg-color($accent)}' opacity='0.3'/%3E%3Ccircle cx='150' cy='12' r='1.8' fill='#{svg-color($accent)}' opacity='0.25'/%3E%3Ccircle cx='222' cy='8' r='1.3' fill='#{svg-color($accent)}' opacity='0.35'/%3E%3Ccircle cx='288' cy='11' r='1.5' fill='#{svg-color($accent)}' opacity='0.3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: -1;
+    animation: underlineDraw 1s ease-out 0.8s both;
+
+    @include respond-to('desktop') {
+      height: 22px;
+      bottom: -6px;
+    }
+  }
+
+  // Subtle highlight behind the word
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -2%;
+    width: 104%;
+    height: 40%;
+    background: rgba($accent, 0.06);
+    border-radius: 4px;
+    z-index: -2;
+  }
+}
+
+@keyframes underlineDraw {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+// ─── DESCRIPTION ────────────────────────────────────────
+.description {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin-bottom: $space-xl;
+
+  @include respond-to('desktop') {
+    font-size: 18px;
+  }
+}
+
+// ─── CTA BUTTONS ────────────────────────────────────────
+.ctas {
+  display: flex;
+  gap: $space-md;
+  flex-wrap: wrap;
+  margin-bottom: $space-2xl;
+
+  // Ghost button inherits premium styling from Button.module.scss — no override needed
+}
+
+// ─── TRUST ROW ──────────────────────────────────────────
+.trustRow {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  padding-top: $space-xl;
+  border-top: 1px solid rgba($primary, 0.15);
+  flex-wrap: wrap;
+
+  @include respond-to('desktop') {
+    gap: $space-xl;
+  }
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  strong {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+
+  span {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+}
+
+.trustIcon {
+  font-size: 22px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.trustDivider {
+  width: 1px;
+  height: 32px;
+  background-color: rgba($primary, 0.15);
+
+  @include below('tablet') {
+    display: none;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// VISUAL COLUMN — 47%
+// ═══════════════════════════════════════════════════════
+
+.visualCol {
+  flex: 1;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition: opacity 0.9s ease-out 0.2s, transform 0.9s ease-out 0.2s;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @include respond-to('desktop') {
+    flex: 0 0 47%;
+    max-width: 47%;
+  }
+}
+
+// ─── MAIN CARD ──────────────────────────────────────────
+.mainCard {
+  position: relative;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  box-shadow:
+    0 25px 60px rgba($primary, 0.12),
+    0 8px 20px rgba($primary, 0.06);
+  background-color: var(--surface);
+  border: 1px solid var(--border-light);
+
+  // Accent top line
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, $accent, rgba($accent, 0.4) 40%, rgba(#0ea5e9, 0.5) 80%, $accent);
+    z-index: 3;
+  }
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: var(--surface-alt);
+
+  @include respond-to('desktop') {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+// ─── CINEMATIC SLIDESHOW ────────────────────────────────
+.slideImage {
+  opacity: 0;
+  transition: opacity 1.8s ease-in-out;
+  transform: scale(1);
+  animation: none;
+
+  &.slideActive {
+    opacity: 1;
+    animation: kenBurns 5.5s ease-in-out forwards;
+  }
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+// ─── SINGLE CIRCLE LOADER — TOP LEFT ────────────────────
+.slideLoader {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loaderRing {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.loaderTrack {
+  fill: rgba(#000, 0.3);
+  stroke: rgba(#fff, 0.2);
+  stroke-width: 2;
+}
+
+.loaderProgress {
+  fill: none;
+  stroke: $accent;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 119.38; // 2 * π * 19
+  stroke-dashoffset: 119.38;
+  animation: circleLoad 5s linear forwards;
+}
+
+.loaderCount {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+@keyframes circleLoad {
+  from {
+    stroke-dashoffset: 119.38;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+// ─── IMAGE OVERLAY STAT STRIP ───────────────────────────
+.imageOverlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-lg;
+  padding: $space-md $space-lg;
+  background: rgba($primary, 0.92);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(#fff, 0.08);
+
+  @include respond-to('desktop') {
+    gap: $space-xl;
+    padding: $space-md $space-2xl;
+  }
+}
+
+.overlayItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.overlayValue {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.2;
+
+  @include respond-to('desktop') {
+    font-size: 20px;
+  }
+}
+
+.overlayLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(#fff, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.overlayDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(#fff, 0.2);
+  flex-shrink: 0;
+}
+
+// ─── FLOATING BADGE ─────────────────────────────────────
+.floatingBadge {
+  position: absolute;
+  top: -18px;
+  right: -14px;
+  z-index: 4;
+  opacity: 0;
+  animation: badgeAppear 0.5s ease-out 1s forwards;
+
+  @include below('tablet') {
+    top: -14px;
+    right: $space-md;
+  }
+}
+
+@keyframes badgeAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ─── ACCENT DECORATIVE SHAPE ────────────────────────────
+.accentShape {
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 130px;
+  height: 130px;
+  border-radius: $radius-xl;
+  background: linear-gradient(135deg, rgba($accent, 0.15), rgba($accent, 0.03));
+  border: 1px solid rgba($accent, 0.1);
+  transform: rotate(15deg);
+  z-index: -1;
+
+  @include below('tablet') {
+    width: 80px;
+    height: 80px;
+    bottom: -20px;
+    left: -10px;
+  }
+}

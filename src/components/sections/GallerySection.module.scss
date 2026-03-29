@@ -1,0 +1,7 @@
+@use '@/styles/variables' as *;
+@use '@/styles/typography' as *;
+
+.heading {
+  @include font-heading(36px);
+  margin-bottom: $space-2xl;
+}

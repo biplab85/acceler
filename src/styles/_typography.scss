@@ -1,0 +1,47 @@
+@use 'variables' as *;
+@use 'breakpoints' as *;
+
+@mixin font-heading($size: 36px) {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-primary);
+  font-size: $size * 0.72;
+
+  @include respond-to('tablet') {
+    font-size: $size * 0.85;
+  }
+
+  @include respond-to('desktop') {
+    font-size: $size;
+  }
+}
+
+@mixin font-heading-semi($size: 24px) {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+  font-size: $size * 0.8;
+
+  @include respond-to('desktop') {
+    font-size: $size;
+  }
+}
+
+@mixin font-body($size: 16px) {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-size: $size;
+}
+
+@mixin font-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}

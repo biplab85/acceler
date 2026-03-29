@@ -1,0 +1,68 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/typography' as *;
+@use '@/styles/breakpoints' as *;
+
+.strip {
+  background-color: var(--surface-alt);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: $space-xl 0;
+
+  @include respond-to('tablet') {
+    padding: $space-xl 0;
+  }
+}
+
+.container {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  @include respond-to('desktop') {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.headline {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.01em;
+}
+
+.stats {
+  display: flex;
+  gap: $space-2xl;
+
+  @include respond-to('desktop') {
+    gap: $space-3xl;
+  }
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-md;
+  background-color: var(--surface);
+  border-radius: $radius-md;
+  border: 1px solid var(--border-light);
+}
+
+.value {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}

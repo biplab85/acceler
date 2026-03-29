@@ -1,0 +1,103 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/typography' as *;
+
+.slide {
+  background-color: var(--surface);
+  border-radius: $radius-xl;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  transition: box-shadow $transition-base, border-color $transition-base;
+
+  &:hover {
+    @include shadow-md;
+    border-color: rgba($accent, 0.15);
+
+    .image {
+      transform: scale(1.04);
+    }
+  }
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background-color: var(--surface-alt);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform $transition-slow;
+}
+
+.location {
+  position: absolute;
+  top: $space-md;
+  left: $space-md;
+  background-color: rgba($primary, 0.88);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: $radius-full;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.02em;
+}
+
+.content {
+  padding: $space-lg $space-lg $space-xl;
+}
+
+.title {
+  @include font-heading-semi(16px);
+  margin-bottom: $space-xs;
+}
+
+.result {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  margin-bottom: $space-sm;
+  letter-spacing: -0.01em;
+}
+
+// ─── FEATURE ICONS (Bed / Bath / Garage) ────────────────
+.features {
+  display: flex;
+  gap: $space-md;
+  margin-bottom: $space-sm;
+  flex-wrap: wrap;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.iconBed {
+  font-size: 16px;
+  color: #3b82f6; // blue
+}
+
+.iconBath {
+  font-size: 16px;
+  color: #06b6d4; // cyan
+}
+
+.iconGarage {
+  font-size: 16px;
+  color: #8b5cf6; // purple
+}
+
+.detail {
+  @include font-body(13px);
+  color: var(--text-tertiary);
+}

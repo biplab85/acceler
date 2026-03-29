@@ -1,0 +1,26 @@
+@use '@/styles/variables' as *;
+@use '@/styles/typography' as *;
+
+.item {
+  padding: $space-lg 0;
+  border-left: 3px solid var(--border);
+  padding-left: $space-lg;
+  transition: border-color $transition-base;
+
+  &:hover {
+    border-left-color: var(--accent);
+  }
+
+  & + & {
+    margin-top: $space-sm;
+  }
+}
+
+.title {
+  @include font-heading-semi(17px);
+  margin-bottom: $space-xs;
+}
+
+.description {
+  @include font-body(15px);
+}

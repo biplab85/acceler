@@ -1,0 +1,104 @@
+@use 'variables' as *;
+
+// ─── RESET ──────────────────────────────────────────────
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: $text-primary;
+  background-color: $surface;
+  overflow-x: hidden;
+}
+
+// ─── CSS CUSTOM PROPERTIES (single source for runtime) ──
+// Every colour is a CSS variable. Components use var(--name).
+// SCSS $variables are ONLY used to seed these root values.
+:root {
+  --primary: #{$primary};
+  --primary-light: #{$primary-light};
+  --accent: #{$accent};
+  --accent-hover: #{$accent-hover};
+  --surface: #{$surface};
+  --surface-alt: #{$surface-alt};
+  --surface-warm: #{$surface-warm};
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-tertiary: #{$text-tertiary};
+  --border: #{$border};
+  --border-light: #{$border-light};
+}
+
+[data-theme="dark"] {
+  --surface: #{$surface-dark};
+  --surface-alt: #{$surface-alt-dark};
+  --surface-warm: #{$surface-dark};
+  --text-primary: #{$text-primary-dark};
+  --text-secondary: #{$text-secondary-dark};
+}
+
+// ─── BASE ELEMENTS ──────────────────────────────────────
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+// ─── SCROLLBAR ──────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $surface-alt;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border;
+  border-radius: $radius-full;
+
+  &:hover {
+    background: $text-tertiary;
+  }
+}
+
+// ─── SELECTION ──────────────────────────────────────────
+::selection {
+  background-color: rgba($accent, 0.15);
+  color: $text-primary;
+}

@@ -1,0 +1,75 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/typography' as *;
+@use '@/styles/breakpoints' as *;
+
+.header {
+  margin-bottom: $space-2xl;
+}
+
+.heading {
+  @include font-heading(36px);
+  margin-bottom: $space-sm;
+}
+
+.description {
+  @include font-body(16px);
+  max-width: 480px;
+}
+
+.sliderWrap {
+  position: relative;
+}
+
+.swiper {
+  padding-bottom: $space-2xl; // space for pagination dots
+
+  :global(.swiper-pagination-bullet) {
+    background-color: $border;
+    opacity: 1;
+    width: 8px;
+    height: 8px;
+    transition: all $transition-base;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background-color: var(--accent);
+    width: 24px;
+    border-radius: $radius-full;
+  }
+}
+
+.navButtons {
+  display: none;
+
+  @include respond-to('desktop') {
+    display: flex;
+    gap: $space-sm;
+    position: absolute;
+    top: -72px;
+    right: 0;
+    z-index: 2;
+  }
+}
+
+.prevBtn,
+.nextBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-full;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  background-color: var(--surface);
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    @include shadow-sm;
+  }
+}

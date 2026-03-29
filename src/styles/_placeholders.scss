@@ -1,0 +1,47 @@
+@use 'variables' as *;
+
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+%flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+%grid-base {
+  display: grid;
+  gap: $grid-gap;
+}
+
+%img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+%section-base {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+%visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

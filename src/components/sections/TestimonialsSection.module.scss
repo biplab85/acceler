@@ -1,0 +1,35 @@
+@use '@/styles/variables' as *;
+@use '@/styles/typography' as *;
+@use '@/styles/breakpoints' as *;
+
+.header {
+  text-align: center;
+  margin-bottom: $space-2xl;
+}
+
+.heading {
+  @include font-heading(36px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $grid-gap;
+
+  @include respond-to('tablet') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('desktop') {
+    grid-template-columns: repeat(3, 1fr);
+
+    // Stagger heights for visual interest
+    & > :nth-child(2) {
+      transform: translateY(24px);
+    }
+
+    & > :nth-child(5) {
+      transform: translateY(24px);
+    }
+  }
+}

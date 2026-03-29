@@ -1,0 +1,52 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/typography' as *;
+@use '@/styles/breakpoints' as *;
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+
+  @include respond-to('desktop') {
+    flex-direction: row;
+    gap: $space-3xl;
+  }
+}
+
+// ─── LEFT: HEADER (sticky) ─────────────────────────────
+.header {
+  @include respond-to('desktop') {
+    flex: 0 0 35%;
+    max-width: 35%;
+    position: sticky;
+    top: 120px;
+    align-self: flex-start;
+  }
+}
+
+.heading {
+  @include font-heading(32px);
+  margin-bottom: $space-md;
+}
+
+.description {
+  @include font-body(15px);
+  margin-bottom: $space-lg;
+}
+
+.ctaLink {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  transition: color $transition-base;
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+// ─── RIGHT: ACCORDION ──────────────────────────────────
+.accordion {
+  flex: 1;
+}

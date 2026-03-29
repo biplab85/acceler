@@ -1,0 +1,70 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/typography' as *;
+@use '@/styles/breakpoints' as *;
+
+.card {
+  background-color: var(--surface);
+  padding: $card-pad-lg;
+  border-radius: $radius-xl;
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+
+  &:hover {
+    transform: translateY(-6px);
+    @include shadow-md;
+    border-color: rgba($accent, 0.2);
+
+    .icon {
+      color: var(--accent);
+      background-color: rgba($accent, 0.08);
+    }
+  }
+
+  @include respond-to('desktop') {
+    padding: $space-2xl;
+  }
+}
+
+.elevated {
+  @include shadow-sm;
+  border-color: rgba($accent, 0.15);
+  background: linear-gradient(180deg, $surface 0%, $surface-warm 100%);
+
+  @include respond-to('desktop') {
+    transform: translateY(-$space-md);
+  }
+
+  &:hover {
+    @include respond-to('desktop') {
+      transform: translateY(calc(-#{$space-md} - 6px));
+    }
+  }
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-lg;
+  background-color: rgba($primary, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--primary);
+  margin-bottom: $space-lg;
+  transition: color $transition-base, background-color $transition-base;
+}
+
+.title {
+  @include font-heading-semi(18px);
+  margin-bottom: $space-sm;
+}
+
+.description {
+  @include font-body(15px);
+  max-width: 320px;
+  line-height: 1.65;
+}

@@ -1,0 +1,455 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+@use "@/styles/typography" as *;
+@use "@/styles/breakpoints" as *;
+
+// ─── FLOATING ICONS ─────────────────────────────────────
+.floatingIcons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floatIcon {
+  position: absolute;
+  font-size: 22px;
+  color: var(--accent);
+  opacity: 0.08;
+  display: flex;
+
+  &:nth-child(1) { animation: iconDrift1 8s ease-in-out infinite; opacity: 0.12; }
+  &:nth-child(2) { animation: iconDrift2 10s ease-in-out infinite; font-size: 18px; opacity: 0.1; }
+  &:nth-child(3) { animation: iconDrift3 12s ease-in-out infinite; font-size: 26px; opacity: 0.12; }
+  &:nth-child(4) { animation: iconDrift1 9s ease-in-out 2s infinite; font-size: 20px; opacity: 0.09; }
+  &:nth-child(5) { animation: iconDrift2 11s ease-in-out 1s infinite; font-size: 24px; opacity: 0.1; }
+  &:nth-child(6) { animation: iconDrift3 7s ease-in-out 3s infinite; font-size: 16px; opacity: 0.14; }
+
+  @include below("tablet") { display: none; }
+}
+
+@keyframes iconDrift1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(15px, -20px) rotate(8deg); }
+  50% { transform: translate(-10px, -35px) rotate(-5deg); }
+  75% { transform: translate(20px, -15px) rotate(12deg); }
+}
+
+@keyframes iconDrift2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-20px, 15px) rotate(-10deg); }
+  66% { transform: translate(15px, -25px) rotate(8deg); }
+}
+
+@keyframes iconDrift3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(25px, -30px) rotate(15deg) scale(1.1); }
+}
+
+// ─── FLOATING GEOMETRIC SHAPES ──────────────────────────
+.floatingShapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  pointer-events: none;
+
+  @include below("tablet") { display: none; }
+}
+
+// Triangle — top-left
+.shape1 {
+  top: 10%;
+  left: 6%;
+  width: 38px;
+  height: 38px;
+  color: var(--accent);
+  opacity: 0.15;
+  animation: shapeDrift1 14s ease-in-out infinite;
+}
+
+// Square — top-right
+.shape2 {
+  top: 18%;
+  right: 5%;
+  width: 30px;
+  height: 30px;
+  color: var(--primary);
+  opacity: 0.1;
+  animation: shapeDrift2 18s ease-in-out infinite;
+}
+
+// Circle — mid-left
+.shape3 {
+  top: 48%;
+  left: 2%;
+  width: 42px;
+  height: 42px;
+  color: var(--accent);
+  opacity: 0.12;
+  animation: shapeDrift3 12s ease-in-out infinite;
+}
+
+// Diamond — mid-right
+.shape4 {
+  top: 52%;
+  right: 3%;
+  width: 32px;
+  height: 32px;
+  color: var(--primary);
+  opacity: 0.1;
+  animation: shapeDrift1 16s ease-in-out 3s infinite;
+}
+
+// Hexagon — bottom-left
+.shape5 {
+  bottom: 12%;
+  left: 4%;
+  width: 36px;
+  height: 36px;
+  color: var(--accent);
+  opacity: 0.12;
+  animation: shapeDrift2 20s ease-in-out 2s infinite;
+}
+
+// Plus — bottom-right
+.shape6 {
+  bottom: 18%;
+  right: 6%;
+  width: 28px;
+  height: 28px;
+  color: var(--primary);
+  opacity: 0.14;
+  animation: shapeDrift3 15s ease-in-out 1s infinite;
+}
+
+// Small filled dot
+.shape7 {
+  top: 32%;
+  left: 12%;
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  opacity: 0.18;
+  animation: shapeDrift1 10s ease-in-out 4s infinite;
+}
+
+// Small filled triangle
+.shape8 {
+  bottom: 32%;
+  right: 10%;
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+  opacity: 0.12;
+  animation: shapeDrift2 13s ease-in-out 2s infinite;
+}
+
+@keyframes shapeDrift1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(12px, -18px) rotate(15deg); }
+  50% { transform: translate(-8px, -30px) rotate(-10deg); }
+  75% { transform: translate(18px, -12px) rotate(20deg); }
+}
+
+@keyframes shapeDrift2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-15px, 12px) rotate(-12deg); }
+  66% { transform: translate(10px, -20px) rotate(15deg); }
+}
+
+@keyframes shapeDrift3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(20px, -25px) rotate(25deg) scale(1.15); }
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+
+  @include respond-to("desktop") {
+    flex-direction: row;
+    align-items: stretch;
+    gap: $space-3xl;
+  }
+}
+
+// ─── LEFT COLUMN — founder image + stats ────────────────
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  @include respond-to("desktop") {
+    flex: 0 0 42%;
+    max-width: 42%;
+  }
+}
+
+// ─── IMAGE WITH FRAME ───────────────────────────────────
+.imageCol {
+  position: relative;
+}
+
+// Decorative background shape behind the frame
+.frameBg {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: 12px;
+  bottom: 12px;
+  border-radius: $radius-xl + 4px;
+  background: linear-gradient(
+    145deg,
+    rgba($accent, 0.06),
+    rgba($primary, 0.04)
+  );
+  border: 1px dashed rgba($accent, 0.12);
+  z-index: 0;
+
+  @include below("tablet") {
+    top: -8px;
+    left: -8px;
+    right: 8px;
+    bottom: 8px;
+  }
+}
+
+// Frame container — holds image + corners + name tag
+.frameWrap {
+  position: relative;
+  z-index: 1;
+  padding: 6px;
+  background: linear-gradient(
+    135deg,
+    rgba($accent, 0.15),
+    rgba($primary, 0.08),
+    rgba($accent, 0.1)
+  );
+  border-radius: $radius-xl + 2px;
+  @include shadow-md;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 3.5;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  background-color: var(--surface-alt);
+}
+
+.image {
+  object-fit: cover;
+}
+
+// Corner accents — decorative L-shapes
+.cornerTL,
+.cornerBR {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  z-index: 3;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: var(--accent);
+    border-radius: 2px;
+  }
+}
+
+.cornerTL {
+  top: -4px;
+  left: -4px;
+
+  &::before {
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 3px;
+  }
+  &::after {
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 24px;
+  }
+}
+
+.cornerBR {
+  bottom: -4px;
+  right: -4px;
+
+  &::before {
+    bottom: 0;
+    right: 0;
+    width: 24px;
+    height: 3px;
+  }
+  &::after {
+    bottom: 0;
+    right: 0;
+    width: 3px;
+    height: 24px;
+  }
+}
+
+// Name tag overlay — bottom of image
+.nameTag {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  background: rgba($primary, 0.88);
+  backdrop-filter: blur(12px);
+  border-radius: $radius-md;
+  padding: $space-md $space-lg;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 2;
+  border: 1px solid rgba(#fff, 0.06);
+
+  strong {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+}
+
+// ─── TEXT (55%) ─────────────────────────────────────────
+.textCol {
+  flex: 1;
+}
+
+.heading {
+  @include font-heading(38px);
+  margin-bottom: $space-lg;
+}
+
+.description {
+  @include font-body(16px);
+  max-width: 560px;
+  margin-bottom: $space-xl;
+  line-height: 1.75;
+}
+
+.quote {
+  background: linear-gradient(135deg, $surface-alt, $surface-warm);
+  border-left: 3px solid var(--accent);
+  padding: $space-xl $space-lg;
+  border-radius: 0 $radius-lg $radius-lg 0;
+  margin-bottom: $space-xl;
+
+  p {
+    @include font-body(15px);
+    font-style: italic;
+    color: var(--text-primary);
+    margin-bottom: $space-sm;
+    line-height: 1.7;
+  }
+}
+
+.author {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  font-style: normal;
+}
+
+// ═════════════════════════════════════════════════════════
+// STATS + TEAM SLIDER — side by side premium layout
+// ═════════════════════════════════════════════════════════
+
+// ─── STATS ROW (under founder image) ────────────────────
+.stats {
+  display: flex;
+  flex-direction: row;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: $space-md $space-lg;
+  transition: all 0.35s ease;
+  flex: 1;
+  min-width: 100px;
+  position: relative;
+  overflow: hidden;
+
+  @include respond-to("tablet") {
+    flex: none;
+  }
+
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba($accent, 0.08);
+    border-left-width: 5px;
+
+    .statIcon {
+      color: var(--accent);
+      transform: scale(1.15);
+      opacity: 1;
+    }
+  }
+}
+
+.statIcon {
+  font-size: 20px;
+  color: var(--primary);
+  opacity: 0.4;
+  margin-bottom: $space-sm;
+  transition: all 0.35s ease;
+  display: flex;
+  align-items: center;
+}
+
+.statValue {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--accent);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 3px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+// ─── TEAM SLIDER (right side, under blockquote) ─────────
+.teamSlider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: $space-xl;
+  min-height: 420px;
+  overflow: visible;
+}

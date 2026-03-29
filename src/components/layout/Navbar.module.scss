@@ -1,0 +1,167 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-navbar;
+  transition: background-color $transition-base, box-shadow $transition-base;
+
+  &.scrolled {
+    background-color: rgba($surface, 0.92);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 $border-light;
+  }
+}
+
+.nav {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+
+  @include respond-to('desktop') {
+    height: 100px;
+  }
+}
+
+.logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+// ─── LINKS ──────────────────────────────────────────────
+.links {
+  display: none;
+  list-style: none;
+
+  @include respond-to('desktop') {
+    display: flex;
+    align-items: center;
+    gap: $space-xl;
+  }
+
+  // Mobile slide-in
+  &.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: var(--surface);
+    padding: $space-4xl $space-xl $space-xl;
+    gap: $space-sm;
+    z-index: $z-overlay;
+    @include shadow-lg;
+    animation: slideInRight 300ms ease-out;
+  }
+}
+
+.link {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color $transition-base;
+  padding: $space-sm 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &.active {
+    color: var(--accent);
+  }
+
+  .open & {
+    font-size: 16px;
+    padding: $space-md 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+}
+
+// ─── CTA BUTTON ─────────────────────────────────────────
+.navIcon {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  opacity: 0.7;
+  transition: opacity $transition-base, color $transition-base;
+
+  .link:hover &,
+  .active & {
+    opacity: 1;
+    color: var(--accent);
+  }
+}
+
+.desktopCta {
+  @include button-variant('primary');
+  font-size: 14px;
+  padding: 10px 24px;
+  display: none;
+
+  @include respond-to('desktop') {
+    display: inline-flex;
+  }
+}
+
+.mobileCta {
+  margin-top: $space-lg;
+
+  @include respond-to('desktop') {
+    display: none;
+  }
+}
+
+.ctaButton {
+  @include button-variant('primary');
+  width: 100%;
+  text-align: center;
+}
+
+// ─── HAMBURGER ──────────────────────────────────────────
+.hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--text-primary);
+  padding: $space-sm;
+  z-index: $z-overlay + 1;
+
+  @include respond-to('desktop') {
+    display: none;
+  }
+}
+
+// ─── OVERLAY ────────────────────────────────────────────
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba($primary, 0.4);
+  z-index: $z-overlay - 1;
+
+  @include respond-to('desktop') {
+    display: none;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

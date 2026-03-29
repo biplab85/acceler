@@ -1,0 +1,8 @@
+@use '@/styles/typography' as *;
+@use '@/styles/variables' as *;
+
+.label {
+  @include font-label;
+  display: inline-block;
+  margin-bottom: $space-md;
+}

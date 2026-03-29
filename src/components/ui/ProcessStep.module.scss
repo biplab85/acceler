@@ -1,0 +1,80 @@
+@use '@/styles/variables' as *;
+@use '@/styles/typography' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/breakpoints' as *;
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: $space-xl $space-lg;
+  background-color: var(--surface);
+  border-radius: $radius-xl;
+  border: 1px solid var(--border-light);
+  transition: all 0.4s ease;
+  @include shadow-sm;
+
+  &:hover {
+    transform: translateY(-4px);
+    @include shadow-md;
+    border-color: rgba($accent, 0.15);
+
+    .dot {
+      transform: scale(1.1);
+      box-shadow: 0 4px 16px rgba($accent, 0.3);
+    }
+  }
+}
+
+.indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: $space-lg;
+}
+
+.dot {
+  width: 52px;
+  height: 52px;
+  border-radius: $radius-full;
+  background: linear-gradient(135deg, $accent, $accent-hover);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+  @include shadow-sm;
+  transition: all 0.35s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: $radius-full;
+    border: 2px solid rgba($accent, 0.15);
+  }
+
+  position: relative;
+}
+
+.line {
+  display: none;
+}
+
+.content {
+  max-width: 220px;
+}
+
+.title {
+  @include font-heading-semi(16px);
+  margin-bottom: $space-xs;
+}
+
+.description {
+  @include font-body(13px);
+  line-height: 1.6;
+}
