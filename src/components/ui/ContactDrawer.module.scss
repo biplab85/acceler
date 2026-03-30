@@ -1,0 +1,306 @@
+@use '@/styles/variables' as *;
+@use '@/styles/mixins' as *;
+@use '@/styles/typography' as *;
+@use '@/styles/breakpoints' as *;
+
+// ─── BACKDROP ───────────────────────────────────────────
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: $z-overlay;
+  pointer-events: none;
+  transition: background 0.4s ease;
+  backdrop-filter: blur(0);
+
+  &.backdropOpen {
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: auto;
+    backdrop-filter: blur(4px);
+  }
+}
+
+// ─── DRAWER PANEL ───────────────────────────────────────
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  z-index: $z-modal;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.08);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  &.drawerOpen {
+    transform: translateX(0);
+  }
+
+  @include respond-to('tablet') {
+    max-width: 480px;
+  }
+}
+
+// ─── CLOSE BUTTON ───────────────────────────────────────
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $transition-base;
+  z-index: 2;
+
+  &:hover {
+    background: rgba($accent, 0.08);
+    border-color: rgba($accent, 0.2);
+    color: $accent;
+    transform: rotate(90deg);
+  }
+}
+
+// ─── INNER SCROLL CONTAINER ─────────────────────────────
+.drawerInner {
+  padding: $space-3xl $space-xl $space-2xl;
+
+  @include respond-to('tablet') {
+    padding: $space-3xl $space-2xl $space-2xl;
+  }
+}
+
+// ─── FORM SECTION ───────────────────────────────────────
+.formSection {
+  margin-bottom: $space-2xl;
+  padding-bottom: $space-2xl;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.drawerTitle {
+  @include font-heading(28px);
+  color: $primary;
+  margin-bottom: $space-sm;
+}
+
+.drawerSubtext {
+  @include font-body(14px);
+  color: $text-secondary;
+  line-height: 1.6;
+  margin-bottom: $space-xl;
+}
+
+// ─── FORM ───────────────────────────────────────────────
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-md;
+
+  @include respond-to('tablet') {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: $text-secondary;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: $radius-md;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: $text-primary;
+  background: var(--surface-alt);
+  transition: border-color $transition-base, box-shadow $transition-base, background-color $transition-base;
+  outline: none;
+
+  &::placeholder {
+    color: $text-tertiary;
+  }
+
+  &:focus {
+    border-color: $accent;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba($accent, 0.08);
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+// ─── SUBMIT BUTTON ──────────────────────────────────────
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  width: 100%;
+  padding: 13px 24px;
+  background: linear-gradient(135deg, $accent, darken($accent, 5%));
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+  margin-top: $space-sm;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(#fff, 0.15), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba($accent, 0.3);
+
+    &::after {
+      left: 100%;
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// ─── CONTACT INFO SECTION ───────────────────────────────
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.infoTitle {
+  @include font-heading-semi(16px);
+  color: $primary;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-sm $space-md;
+  border-radius: $radius-lg;
+  transition: background-color $transition-base;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    background: var(--surface-alt);
+
+    .contactIcon {
+      background: rgba($accent, 0.15);
+      transform: scale(1.05);
+    }
+  }
+}
+
+.contactIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  background: rgba($accent, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: $accent;
+  flex-shrink: 0;
+  transition: all $transition-base;
+}
+
+.contactLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $text-tertiary;
+}
+
+.contactValue {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: $text-primary;
+}
+
+// ─── SOCIAL ROW ─────────────────────────────────────────
+.socialRow {
+  display: flex;
+  gap: $space-md;
+  padding-top: $space-sm;
+}
+
+.socialLink {
+  width: 38px;
+  height: 38px;
+  border-radius: $radius-md;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: $text-secondary;
+  transition: all $transition-base;
+
+  &:hover {
+    background: $accent;
+    border-color: $accent;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+}

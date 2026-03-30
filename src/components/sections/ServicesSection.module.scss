@@ -3,38 +3,86 @@
 @use '@/styles/typography' as *;
 @use '@/styles/breakpoints' as *;
 
-.heading {
-  @include font-heading(36px);
-  margin-bottom: $space-2xl;
-  max-width: 480px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $grid-gap;
+// ─── SECTION ────────────────────────────────────────────
+.section {
+  background: linear-gradient(180deg, var(--surface-alt) 0%, #fff 50%, var(--surface-alt) 100%);
+  padding: $section-pad-lg * 0.6 0;
 
   @include respond-to('tablet') {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include respond-to('desktop') {
-    grid-template-columns: repeat(3, 1fr);
-
-    // Stagger: middle card elevated via component variant
-    // Last two cards span remaining space
-    & > :nth-child(4) {
-      grid-column: 1 / 2;
-    }
-
-    & > :nth-child(5) {
-      grid-column: 2 / 3;
-    }
+    padding: $section-pad-lg 0;
   }
 }
 
-.ctaWrap {
-  margin-top: $space-2xl;
+// ─── STICKY LAYOUT ──────────────────────────────────────
+.stickyLayout {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+
+  @include respond-to('desktop') {
+    flex-direction: row;
+    gap: $space-3xl;
+    align-items: flex-start;
+  }
+}
+
+// ─── LEFT: STICKY PANEL ────────────────────────────────
+.stickyPanel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  @include respond-to('desktop') {
+    position: sticky;
+    top: 120px;
+    flex: 0 0 380px;
+    max-width: 380px;
+    padding-bottom: $space-3xl;
+  }
+}
+
+.heading {
+  @include font-heading(36px);
+  letter-spacing: -0.02em;
+
+  @include respond-to('desktop') {
+    font-size: 42px;
+  }
+}
+
+.subtext {
+  @include font-body(15px);
+  color: $text-secondary;
+  line-height: 1.7;
+}
+
+.stickyStats {
+  display: flex;
+  gap: $space-xl;
+  padding: $space-lg 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.stickyStat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stickyStatValue {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stickyStatLabel {
+  font-size: 13px;
+  color: $text-tertiary;
+  letter-spacing: 0.02em;
 }
 
 .ctaLink {
@@ -44,6 +92,7 @@
   color: var(--accent);
   transition: color $transition-base;
   position: relative;
+  align-self: flex-start;
 
   &::after {
     content: '';
@@ -65,4 +114,202 @@
       transform: scaleX(1);
     }
   }
+}
+
+// ─── RIGHT: SCROLLING CARDS ─────────────────────────────
+.scrollCards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+  min-width: 0;
+}
+
+// ─── CARD ───────────────────────────────────────────────
+.card {
+  background: var(--card-bg);
+  border-radius: $radius-xl;
+  padding: $space-xl;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 12px rgba($primary, 0.03);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+  // Scroll entrance
+  opacity: 0;
+  transform: translateY(30px);
+
+  &.cardVisible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.45s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 50px rgba($primary, 0.08),
+      0 6px 16px rgba($primary, 0.04);
+
+    .iconCircle {
+      transform: scale(1.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .cardAccent {
+      width: 100%;
+    }
+  }
+
+  &.cardVisible:hover {
+    transform: translateY(-4px);
+  }
+
+  @include respond-to('desktop') {
+    padding: $space-2xl $space-xl;
+  }
+}
+
+// ─── CARD HEADER ────────────────────────────────────────
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  margin-bottom: $space-lg;
+}
+
+.iconCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--card-icon-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--card-accent);
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1.5px dashed var(--card-accent);
+    opacity: 0.15;
+  }
+}
+
+.cardNumber {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--card-accent);
+  opacity: 0.15;
+  pointer-events: none;
+  transition: opacity 0.4s ease, -webkit-text-stroke-color 0.4s ease;
+  z-index: 0;
+
+  .card:hover & {
+    opacity: 0.25;
+  }
+
+  @include respond-to('desktop') {
+    font-size: 88px;
+    top: 10px;
+    right: 20px;
+  }
+}
+
+.cardTitle {
+  @include font-heading-semi(20px);
+  color: $text-primary;
+
+  @include respond-to('desktop') {
+    font-size: 22px;
+  }
+}
+
+// ─── CARD BODY ──────────────────────────────────────────
+.cardDesc {
+  @include font-body(15px);
+  line-height: 1.7;
+  color: $text-secondary;
+  margin-bottom: $space-lg;
+}
+
+// ─── HIGHLIGHTS ─────────────────────────────────────────
+.highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-sm $space-md;
+  list-style: none;
+  margin-bottom: $space-lg;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: $text-secondary;
+}
+
+.checkIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--card-accent);
+  flex-shrink: 0;
+}
+
+// ─── STAT BADGE ─────────────────────────────────────────
+.statBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-md;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: $radius-full;
+  align-self: flex-start;
+}
+
+.statValue {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--card-accent);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: $text-tertiary;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+// ─── BOTTOM ACCENT ──────────────────────────────────────
+.cardAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--card-accent), rgba(0, 0, 0, 0));
+  border-radius: 0 3px 0 0;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }

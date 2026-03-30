@@ -7,10 +7,31 @@
   background-color: var(--primary);
   color: rgba(#fff, 0.85);
   padding: $space-3xl 0 $space-lg;
+  position: relative;
+  overflow: hidden;
 }
 
 .container {
   @include container;
+  position: relative;
+  z-index: 2;
+}
+
+// ─── SKYLINE (static, no animation) ────────────────────
+.skylineWrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.skyline {
+  width: 100%;
+  height: 100%;
 }
 
 .grid {
@@ -23,7 +44,7 @@
   }
 
   @include respond-to('desktop') {
-    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
     gap: $space-3xl;
   }
 }
@@ -33,6 +54,10 @@
   display: flex;
   flex-direction: column;
   gap: $space-md;
+
+  img {
+    filter: brightness(0) invert(1);
+  }
 }
 
 .mission {
@@ -82,6 +107,12 @@
   letter-spacing: 0.02em;
 }
 
+.linkColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-lg;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -90,13 +121,39 @@
 }
 
 .footerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 14px;
   color: rgba(#fff, 0.6);
   transition: color $transition-base;
 
   &:hover {
     color: #fff;
+
+    .linkArrow {
+      color: var(--accent);
+      transform: translateX(2px);
+    }
   }
+
+  &.active {
+    color: var(--accent);
+
+    .linkArrow {
+      color: var(--accent);
+      opacity: 1;
+    }
+  }
+}
+
+.linkArrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: rgba(#fff, 0.3);
+  opacity: 0.6;
+  transition: color $transition-base, transform $transition-base, opacity $transition-base;
 }
 
 .contactItem {
@@ -114,6 +171,39 @@
   &:hover {
     color: color.adjust($accent, $lightness: 10%);
   }
+}
+
+// ─── FEATURE LIST (Why Acceler column) ──────────────────
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(#fff, 0.6);
+  transition: color $transition-base;
+
+  &:hover {
+    color: #fff;
+
+    .featureIcon {
+      color: var(--accent);
+    }
+  }
+}
+
+.featureIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: rgba(#fff, 0.35);
+  transition: color $transition-base;
 }
 
 // ─── BOTTOM BAR ─────────────────────────────────────────

@@ -102,3 +102,10 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba($accent, 0.15);
   color: $text-primary;
 }
+
+// ─── HIDE DEFAULT CURSOR (desktop only) ────────────────
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}

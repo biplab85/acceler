@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { Fancybox } from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import { HiOutlineMagnifyingGlassPlus } from 'react-icons/hi2';
 import type { GalleryImage } from '@/lib/content';
 import styles from './GalleryGrid.module.scss';
 
@@ -32,7 +33,7 @@ export function GalleryGrid({ images }: GalleryGridProps) {
           href={img.src}
           data-fancybox="gallery"
           data-caption={img.alt}
-          className={`${styles.item} ${styles[img.aspect]}`}
+          className={styles.item}
         >
           <Image
             src={img.src}
@@ -42,6 +43,9 @@ export function GalleryGrid({ images }: GalleryGridProps) {
             sizes="(max-width: 768px) 100vw, 33vw"
             className={styles.image}
           />
+          <span className={styles.overlay}>
+            <HiOutlineMagnifyingGlassPlus className={styles.zoomIcon} />
+          </span>
         </a>
       ))}
     </div>

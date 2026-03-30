@@ -37,6 +37,8 @@ export interface ServiceItem {
   icon: ReactNode;
   title: string;
   description: string;
+  highlights?: string[];
+  stat?: { value: string; label: string };
 }
 
 export interface CaseStudyItem {
@@ -234,30 +236,40 @@ export const servicesContent = {
       title: 'Suburb Analysis',
       description:
         'Data-driven research across 15,000+ suburbs to identify high-growth corridors before the market catches on.',
+      highlights: ['Proprietary data models', 'Growth corridor mapping', 'Rental yield analysis', 'Infrastructure tracking'],
+      stat: { value: '15,000+', label: 'Suburbs Analysed' },
     },
     {
       icon: <HiOutlineHome />,
       title: 'Property Sourcing',
       description:
         'Finding high-growth, high-cashflow investment properties matched to your unique strategy and budget.',
+      highlights: ['Off-market access', 'On-site inspections', 'Price benchmarking', 'Due diligence reports'],
+      stat: { value: '75+', label: 'Properties Sourced' },
     },
     {
       icon: <HiOutlineDocumentSearch />,
       title: "Buyer's Advocacy",
       description:
         'End-to-end representation from search to settlement — inspections, negotiation, and paperwork handled.',
+      highlights: ['Expert negotiation', 'Contract review', 'Solicitor coordination', 'Settlement support'],
+      stat: { value: '100%', label: 'Client Satisfaction' },
     },
     {
       icon: <HiOutlineUserGroup />,
       title: 'Portfolio Strategy',
       description:
         'Multi-property planning and portfolio construction for long-term wealth building across market cycles.',
+      highlights: ['Risk profiling', 'Multi-property planning', 'Cash flow modelling', 'Growth forecasting'],
+      stat: { value: '$1M+', label: 'Equity Built' },
     },
     {
       icon: <HiOutlineClipboardCheck />,
       title: 'Market Reports',
       description:
         'Quarterly data insights and growth forecasts so you always know where the market is heading.',
+      highlights: ['Quarterly insights', 'Suburb rankings', 'Trend forecasts', 'Investment alerts'],
+      stat: { value: '4x', label: 'Reports Per Year' },
     },
   ] as ServiceItem[],
 };
@@ -324,12 +336,12 @@ export const galleryContent = {
   label: 'OUR WORK',
   heading: "Properties We've Secured",
   images: [
-    { src: '/images/gallery/gallery-1.svg', alt: 'Modern family home exterior in Melbourne western suburbs', aspect: 'landscape' as const },
-    { src: '/images/gallery/gallery-2.svg', alt: 'Open-plan living area with contemporary finishes', aspect: 'portrait' as const },
-    { src: '/images/gallery/gallery-3.svg', alt: 'Property inspection in progress', aspect: 'square' as const },
-    { src: '/images/gallery/gallery-4.svg', alt: 'Suburban streetscape in growth corridor', aspect: 'square' as const },
-    { src: '/images/gallery/gallery-5.svg', alt: 'New development property frontage', aspect: 'landscape' as const },
-    { src: '/images/gallery/gallery-6.svg', alt: 'Kitchen renovation in investment property', aspect: 'portrait' as const },
+    { src: '/images/gallery/gallery-1.jpg', alt: 'Investor\'s Delight — high-growth QLD property', aspect: 'landscape' as const },
+    { src: '/images/gallery/gallery-2.jpg', alt: 'Secluded Luxury — premium WA investment', aspect: 'portrait' as const },
+    { src: '/images/gallery/gallery-3.jpg', alt: 'Your Slice of Paradise — coastal WA home', aspect: 'square' as const },
+    { src: '/images/gallery/gallery-4.jpg', alt: 'Garden House — charming QLD family property', aspect: 'square' as const },
+    { src: '/images/gallery/gallery-5.jpg', alt: 'Invest in Your Future — modern WA residence', aspect: 'landscape' as const },
+    { src: '/images/gallery/gallery-6.jpg', alt: 'Luxury Living Redefined — premium Australian home', aspect: 'portrait' as const },
   ] as GalleryImage[],
 };
 

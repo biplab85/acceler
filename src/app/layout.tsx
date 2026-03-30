@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Sora, Inter } from 'next/font/google';
+import { CustomCursor } from '@/components/ui/CustomCursor';
+import { ContactDrawerProvider } from '@/components/ui/ContactDrawer';
 import '@/styles/globals.scss';
 
 const sora = Sora({
@@ -37,7 +39,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${sora.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        <CustomCursor />
+        <ContactDrawerProvider>
+          {children}
+        </ContactDrawerProvider>
+      </body>
     </html>
   );
 }

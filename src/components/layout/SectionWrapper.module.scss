@@ -14,16 +14,83 @@
 }
 
 .bg-alt {
-  background-color: var(--surface-alt);
+  background: linear-gradient(
+    180deg,
+    var(--surface-alt) 0%,
+    rgba(247, 248, 250, 0.5) 50%,
+    var(--surface-alt) 100%
+  );
 }
 
 .bg-warm {
-  background-color: var(--surface-warm);
+  background: linear-gradient(
+    135deg,
+    var(--surface-warm) 0%,
+    #fff 40%,
+    var(--surface-warm) 100%
+  );
 }
 
 .bg-primary {
-  background-color: var(--primary);
+  background: linear-gradient(
+    160deg,
+    $primary 0%,
+    $primary-light 50%,
+    darken($primary, 3%) 100%
+  );
   color: #fff;
+}
+
+// ─── DECORATIVE TOP EDGE ────────────────────────────────
+.topEdge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba($border, 0.4) 20%,
+    rgba($accent, 0.15) 50%,
+    rgba($border, 0.4) 80%,
+    transparent 100%
+  );
+  z-index: 2;
+}
+
+// ─── CORNER ACCENTS ─────────────────────────────────────
+.cornerTL,
+.cornerBR {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+
+  @include respond-to('desktop') {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.cornerTL {
+  top: 0;
+  left: 0;
+}
+
+.cornerBR {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+// Show corners when section is visible
+.visible .cornerTL,
+.visible .cornerBR {
+  opacity: 1;
 }
 
 // ─── PADDING VARIANTS ───────────────────────────────────
@@ -42,13 +109,16 @@
 // ─── CONTAINER ──────────────────────────────────────────
 .container {
   @include container;
+  position: relative;
+  z-index: 1;
 }
 
 // ─── ANIMATION ──────────────────────────────────────────
 .animated {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 
   &.visible {
     opacity: 1;
