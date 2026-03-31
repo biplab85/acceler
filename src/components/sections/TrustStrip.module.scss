@@ -1,7 +1,7 @@
-@use '@/styles/variables' as *;
-@use '@/styles/mixins' as *;
-@use '@/styles/typography' as *;
-@use '@/styles/breakpoints' as *;
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+@use "@/styles/typography" as *;
+@use "@/styles/breakpoints" as *;
 
 .strip {
   background-color: var(--surface-alt);
@@ -9,7 +9,7 @@
   border-bottom: 1px solid var(--border-light);
   padding: $space-xl 0;
 
-  @include respond-to('tablet') {
+  @include respond-to("tablet") {
     padding: $space-xl 0;
   }
 }
@@ -20,7 +20,7 @@
   flex-direction: column;
   gap: $space-lg;
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -35,11 +35,55 @@
 }
 
 .stats {
-  display: flex;
-  gap: $space-2xl;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-md;
 
-  @include respond-to('desktop') {
+  > :last-child {
+    grid-column: 1 / -1;
+    justify-content: center;
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+
+    .value {
+      color: #fff !important;
+    }
+  }
+
+  > * {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+  }
+
+  .value {
+    color: var(--accent) !important;
+  }
+
+  .label {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  @include respond-to("desktop") {
+    display: flex;
+    flex-direction: row;
     gap: $space-3xl;
+
+    > :last-child {
+      grid-column: unset;
+    }
+
+    > * {
+      background-color: var(--surface) !important;
+      border-color: var(--border-light) !important;
+    }
+
+    .value {
+      color: var(--primary) !important;
+    }
+
+    .label {
+      color: #fff !important;
+    }
   }
 }
 

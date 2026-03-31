@@ -1,13 +1,15 @@
-@use '@/styles/variables' as *;
-@use '@/styles/mixins' as *;
-@use '@/styles/typography' as *;
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+@use "@/styles/typography" as *;
 
 .slide {
-  background-color: var(--surface);
+  position: relative;
   border-radius: $radius-xl;
   overflow: hidden;
   border: 1px solid var(--border-light);
-  transition: box-shadow $transition-base, border-color $transition-base;
+  transition:
+    box-shadow $transition-base,
+    border-color $transition-base;
 
   &:hover {
     @include shadow-md;
@@ -22,9 +24,27 @@
 .imageWrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 11;
+  aspect-ratio: 12 / 14;
   overflow: hidden;
   background-color: var(--surface-alt);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 75%;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.6) 30%,
+      rgba(0, 0, 0, 0.25) 60%,
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
 }
 
 .image {
@@ -47,12 +67,18 @@
 }
 
 .content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: $space-lg $space-lg $space-xl;
+  z-index: 2;
 }
 
 .title {
   @include font-heading-semi(16px);
   margin-bottom: $space-xs;
+  color: #fff;
 }
 
 .result {
@@ -69,7 +95,7 @@
 .features {
   display: flex;
   gap: $space-md;
-  margin-bottom: $space-sm;
+  //margin-bottom: $space-sm;
   flex-wrap: wrap;
 }
 
@@ -79,7 +105,7 @@
   gap: 4px;
   font-size: 12px;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: rgba(#fff, 0.8);
 }
 
 .iconBed {
@@ -99,5 +125,14 @@
 
 .detail {
   @include font-body(13px);
-  color: var(--text-tertiary);
+  color: rgba(#fff, 0.6);
+}
+
+.LeftContent {
+  padding: 0;
+}
+.statatusWraper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

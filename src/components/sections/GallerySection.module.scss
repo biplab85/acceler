@@ -1,7 +1,180 @@
 @use '@/styles/variables' as *;
 @use '@/styles/typography' as *;
+@use '@/styles/breakpoints' as *;
+
+// ═══════════════════════════════════════════════════════════
+// BLOG SECTION — Dark cinematic showcase
+// ═══════════════════════════════════════════════════════════
+
+.sectionWrap {
+  position: relative;
+  background: linear-gradient(165deg, #f0f4f8 0%, #e8edf4 35%, #f5f0eb 65%, #f7f8fa 100%);
+  padding: 80px 0 100px;
+  overflow: hidden;
+
+  @include respond-to('desktop') {
+    padding: 120px 0 140px;
+  }
+
+  // Noise texture
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 30%;
+    width: 40%;
+    height: 50%;
+    background: radial-gradient(ellipse, rgba($accent, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $container-px-mobile;
+  position: relative;
+  z-index: 1;
+
+  @include respond-to('desktop') {
+    padding: 0 $container-px-desktop;
+  }
+}
+
+.headerRow {
+  margin-bottom: $space-3xl;
+  text-align: center;
+
+  @include respond-to('desktop') {
+    margin-bottom: 72px;
+  }
+}
+
+.labelWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  margin-bottom: $space-md;
+}
+
+.labelLine {
+  width: 32px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 
 .heading {
   @include font-heading(36px);
-  margin-bottom: $space-2xl;
+  color: var(--text-primary);
+  margin-bottom: $space-md;
+
+  @include respond-to('desktop') {
+    font-size: 48px;
+  }
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+// ─── AMBIENT FLOATING ORBS ─────────────────────────────
+.ambientOrb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+}
+
+.orb1 {
+  width: 300px;
+  height: 300px;
+  background: rgba($accent, 0.07);
+  bottom: 10%;
+  right: -5%;
+  animation: orbFloat1 12s ease-in-out infinite;
+}
+
+.orb2 {
+  width: 200px;
+  height: 200px;
+  background: rgba($primary-light, 0.06);
+  top: 20%;
+  left: -3%;
+  animation: orbFloat2 15s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, -20px); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, 15px); }
+}
+
+// ─── VIEW ALL CTA ──────────────────────────────────────
+.ctaRow {
+  display: flex;
+  justify-content: center;
+  margin-top: $space-2xl;
+}
+
+.readMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: 14px 36px;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid rgba($primary, 0.2);
+  border-radius: $radius-full;
+  letter-spacing: 0.02em;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+  &:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba($accent, 0.25);
+    transform: translateY(-2px);
+
+    .readMoreArrow {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.readMoreArrow {
+  transition: transform 0.35s ease;
+  font-size: 18px;
 }

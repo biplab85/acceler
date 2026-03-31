@@ -289,8 +289,8 @@ function ConnectorLines({
 
       // Shorten from dot side by 18px
       const d2 = Math.sqrt((ex - dx) ** 2 + (ey - dy) ** 2);
-      const sx = dx + ((ex - dx) / d2) * 18;
-      const sy = dy + ((ey - dy) / d2) * 18;
+      const sx = d2 > 0 ? dx + ((ex - dx) / d2) * 18 : dx;
+      const sy = d2 > 0 ? dy + ((ey - dy) / d2) * 18 : dy;
 
       return { x1: sx, y1: sy, x2: ex, y2: ey, color: STEP_COLORS[i], idx: i };
     });

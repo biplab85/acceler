@@ -8,12 +8,18 @@
   left: 0;
   right: 0;
   z-index: $z-navbar;
-  transition: background-color $transition-base, box-shadow $transition-base;
+  transition: background-color $transition-base, box-shadow $transition-base, transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 
   &.scrolled {
     background-color: rgba($surface, 0.92);
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 0 $border-light;
+  }
+
+  &.hidden {
+    @include respond-to('desktop') {
+      transform: translateY(-100%);
+    }
   }
 }
 
@@ -22,7 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 90px;
+  height: 60px;
 
   @include respond-to('desktop') {
     height: 100px;
@@ -33,6 +39,22 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
+}
+
+.logoFull {
+  display: none !important;
+
+  @include respond-to('desktop') {
+    display: block !important;
+  }
+}
+
+.logoIcon {
+  display: block !important;
+
+  @include respond-to('desktop') {
+    display: none !important;
+  }
 }
 
 // ─── LINKS ──────────────────────────────────────────────

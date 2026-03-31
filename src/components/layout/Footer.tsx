@@ -10,7 +10,10 @@ import {
   HiOutlineHomeModern,
   HiOutlineUserGroup,
   HiOutlineChevronRight,
+  HiOutlineMapPin,
+  HiOutlineEnvelope,
 } from 'react-icons/hi2';
+import { FaWhatsapp } from 'react-icons/fa';
 import styles from './Footer.module.scss';
 
 function FooterSkyline() {
@@ -289,14 +292,19 @@ export function Footer() {
           <div className={styles.column}>
             <h4 className={styles.columnTitle}>Contact</h4>
             <ul className={styles.list}>
-              <li className={styles.contactItem}>{contact.address}</li>
+              <li className={styles.contactItem}>
+                <HiOutlineMapPin className={styles.contactIcon} />
+                {contact.address}
+              </li>
               <li>
                 <a href={`mailto:${contact.email}`} className={styles.footerLink}>
+                  <HiOutlineEnvelope className={styles.contactIcon} />
                   {contact.email}
                 </a>
               </li>
               <li>
-                <a href={`tel:${contact.phone}`} className={styles.footerLink}>
+                <a href={`https://wa.me/61${contact.phone.replace(/^0/, '')}`} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>
+                  <FaWhatsapp className={styles.contactIcon} />
                   {contact.phone}
                 </a>
               </li>

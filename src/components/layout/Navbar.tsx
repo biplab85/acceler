@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { HiOutlineMenu, HiOutlineX, HiOutlineHome, HiOutlineUserGroup, HiOutlineBriefcase, HiOutlineChartBar, HiOutlineClipboardList, HiOutlineQuestionMarkCircle, HiOutlinePhone, HiOutlineCalendar } from 'react-icons/hi';
@@ -21,11 +21,22 @@ import styles from './Navbar.module.scss';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const lastScrollY = useRef(0);
   const activeSection = useActiveSection(NAV_LINKS.map((l) => l.href.slice(1)));
 
   const handleScroll = useCallback(() => {
-    setIsScrolled(window.scrollY > 40);
+    const currentY = window.scrollY;
+    setIsScrolled(currentY > 40);
+
+    const isDesktop = window.innerWidth >= 1024;
+    if (isDesktop && currentY > 100) {
+      setIsHidden(currentY > lastScrollY.current);
+    } else {
+      setIsHidden(false);
+    }
+    lastScrollY.current = currentY;
   }, []);
 
   useEffect(() => {
@@ -43,7 +54,7 @@ export function Navbar() {
   }, [isOpen]);
 
   return (
-    <header className={clsx(styles.header, isScrolled && styles.scrolled)}>
+    <header className={clsx(styles.header, isScrolled && styles.scrolled, isHidden && styles.hidden)}>
       <nav className={styles.nav}>
         <a href="#home" className={styles.logo}>
           <Image
@@ -52,6 +63,16 @@ export function Navbar() {
             width={80}
             height={80}
             priority
+            className={styles.logoFull}
+            style={{ objectFit: 'contain' }}
+          />
+          <Image
+            src="/images/favicon.ico"
+            alt="Acceler Investing"
+            width={40}
+            height={40}
+            priority
+            className={styles.logoIcon}
             style={{ objectFit: 'contain' }}
           />
         </a>

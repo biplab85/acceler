@@ -1,11 +1,20 @@
-import Image from 'next/image';
-import { IoBedOutline } from 'react-icons/io5';
-import { PiBathtub } from 'react-icons/pi';
-import { RiParkingBoxLine } from 'react-icons/ri';
-import type { CaseStudyItem } from '@/lib/content';
-import styles from './CaseStudySlide.module.scss';
+import type { CaseStudyItem } from "@/lib/content";
+import Image from "next/image";
+import { IoBedOutline } from "react-icons/io5";
+import { PiBathtub } from "react-icons/pi";
+import { RiParkingBoxLine } from "react-icons/ri";
+import styles from "./CaseStudySlide.module.scss";
 
-export function CaseStudySlide({ image, location, title, result, detail, bed, bath, garage }: CaseStudyItem) {
+export function CaseStudySlide({
+  image,
+  location,
+  title,
+  result,
+  detail,
+  bed,
+  bath,
+  garage,
+}: CaseStudyItem) {
   return (
     <div className={styles.slide}>
       <div className={styles.imageWrap}>
@@ -23,30 +32,33 @@ export function CaseStudySlide({ image, location, title, result, detail, bed, ba
         <h3 className={styles.title}>{title}</h3>
         <span className={styles.result}>{result}</span>
 
-        {(bed || bath || garage) && (
-          <div className={styles.features}>
-            {bed && (
-              <span className={styles.feature}>
-                <IoBedOutline className={styles.iconBed} />
-                <span>{bed} Bed</span>
-              </span>
-            )}
-            {bath && (
-              <span className={styles.feature}>
-                <PiBathtub className={styles.iconBath} />
-                <span>{bath} Bath</span>
-              </span>
-            )}
-            {garage && (
-              <span className={styles.feature}>
-                <RiParkingBoxLine className={styles.iconGarage} />
-                <span>{garage} Garage</span>
-              </span>
+        <div className={styles.statatusWraper}>
+          <div className={styles.LeftContent}>
+            {(bed || bath || garage) && (
+              <div className={styles.features}>
+                {bed && (
+                  <span className={styles.feature}>
+                    <IoBedOutline className={styles.iconBed} />
+                    <span>{bed} Bed</span>
+                  </span>
+                )}
+                {bath && (
+                  <span className={styles.feature}>
+                    <PiBathtub className={styles.iconBath} />
+                    <span>{bath} Bath</span>
+                  </span>
+                )}
+                {garage && (
+                  <span className={styles.feature}>
+                    <RiParkingBoxLine className={styles.iconGarage} />
+                    <span>{garage} Garage</span>
+                  </span>
+                )}
+              </div>
             )}
           </div>
-        )}
-
-        <p className={styles.detail}>{detail}</p>
+          <p className={styles.detail}>{detail}</p>
+        </div>
       </div>
     </div>
   );

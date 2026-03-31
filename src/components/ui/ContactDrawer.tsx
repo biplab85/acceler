@@ -161,24 +161,16 @@ function ContactDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
             <h3 className={styles.infoTitle}>Contact Details</h3>
 
             <div className={styles.contactList}>
-              <a href="mailto:info@acceler.com.au" className={styles.contactItem}>
+              <a href="mailto:Invest@acceler.com.au" className={styles.contactItem}>
                 <div className={styles.contactIcon}><HiOutlineEnvelope /></div>
                 <div>
                   <span className={styles.contactLabel}>Email</span>
-                  <span className={styles.contactValue}>info@acceler.com.au</span>
-                </div>
-              </a>
-
-              <a href="tel:+61300000000" className={styles.contactItem}>
-                <div className={styles.contactIcon}><HiOutlinePhone /></div>
-                <div>
-                  <span className={styles.contactLabel}>Phone</span>
-                  <span className={styles.contactValue}>+61 3 0000 0000</span>
+                  <span className={styles.contactValue}>Invest@acceler.com.au</span>
                 </div>
               </a>
 
               <a
-                href="https://wa.me/61300000000"
+                href="https://wa.me/610433112316"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.contactItem}
@@ -186,14 +178,14 @@ function ContactDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                 <div className={styles.contactIcon}><FaWhatsapp /></div>
                 <div>
                   <span className={styles.contactLabel}>WhatsApp</span>
-                  <span className={styles.contactValue}>Chat with us</span>
+                  <span className={styles.contactValue}>0433112316</span>
                 </div>
               </a>
             </div>
 
             <div className={styles.socialRow}>
               <a
-                href="https://linkedin.com/company/acceler-investing"
+                href="https://www.linkedin.com/company/acceler-investing/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -202,7 +194,7 @@ function ContactDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                 <FaLinkedinIn />
               </a>
               <a
-                href="https://facebook.com/accelerinvesting"
+                href="https://www.facebook.com/accelerinvesting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
@@ -211,7 +203,9 @@ function ContactDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                 <FaFacebookF />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/acceler.investing/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.socialLink}
                 aria-label="Instagram"
               >

@@ -333,15 +333,15 @@ export const caseStudiesContent = {
 
 // ─── GALLERY ────────────────────────────────────────────
 export const galleryContent = {
-  label: 'OUR WORK',
-  heading: "Properties We've Secured",
+  label: 'OUR BLOG',
+  heading: 'Latest Insights & Updates',
   images: [
-    { src: '/images/gallery/gallery-1.jpg', alt: 'Investor\'s Delight — high-growth QLD property', aspect: 'landscape' as const },
-    { src: '/images/gallery/gallery-2.jpg', alt: 'Secluded Luxury — premium WA investment', aspect: 'portrait' as const },
-    { src: '/images/gallery/gallery-3.jpg', alt: 'Your Slice of Paradise — coastal WA home', aspect: 'square' as const },
-    { src: '/images/gallery/gallery-4.jpg', alt: 'Garden House — charming QLD family property', aspect: 'square' as const },
-    { src: '/images/gallery/gallery-5.jpg', alt: 'Invest in Your Future — modern WA residence', aspect: 'landscape' as const },
-    { src: '/images/gallery/gallery-6.jpg', alt: 'Luxury Living Redefined — premium Australian home', aspect: 'portrait' as const },
+    { src: '/images/gallery/gallery-1.jpg', alt: 'Why QLD Is the Hottest Market for Property Investors in 2026', aspect: 'landscape' as const },
+    { src: '/images/gallery/gallery-2.jpg', alt: 'How We Helped a First-Time Buyer Build $120K Equity in 12 Months', aspect: 'portrait' as const },
+    { src: '/images/gallery/gallery-3.jpg', alt: '5 Coastal Suburbs Poised for Massive Growth This Year', aspect: 'square' as const },
+    { src: '/images/gallery/gallery-4.jpg', alt: 'The Data-Driven Approach to Finding High-Cashflow Properties', aspect: 'square' as const },
+    { src: '/images/gallery/gallery-5.jpg', alt: 'Suburb Spotlight: Why Investors Are Flocking to Western Australia', aspect: 'landscape' as const },
+    { src: '/images/gallery/gallery-6.jpg', alt: 'Your Complete Guide to Building a Property Portfolio from Scratch', aspect: 'portrait' as const },
   ] as GalleryImage[],
 };
 
@@ -536,17 +536,17 @@ export const footerContent = {
   socials: [
     {
       icon: <FaLinkedinIn />,
-      href: 'https://linkedin.com/company/acceler-investing',
+      href: 'https://www.linkedin.com/company/acceler-investing/',
       label: 'LinkedIn',
     },
     {
       icon: <FaFacebookF />,
-      href: 'https://facebook.com/accelerinvesting',
+      href: 'https://www.facebook.com/accelerinvesting',
       label: 'Facebook',
     },
     {
       icon: <FaInstagram />,
-      href: '#',
+      href: 'https://www.instagram.com/acceler.investing/',
       label: 'Instagram',
     },
   ] as SocialLink[],
@@ -565,8 +565,8 @@ export const footerContent = {
   ],
   contact: {
     address: 'Melbourne, VIC, Australia',
-    email: 'info@acceler.com.au',
-    phone: '+61 3 0000 0000',
+    email: 'Invest@acceler.com.au',
+    phone: '0433112316',
     cta: { label: 'Book a Call', href: '#contact' },
   },
   copyright: '© 2024 Acceler Investing. All Rights Reserved.',
