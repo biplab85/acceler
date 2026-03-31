@@ -1,7 +1,7 @@
-@use '@/styles/variables' as *;
-@use '@/styles/mixins' as *;
-@use '@/styles/typography' as *;
-@use '@/styles/breakpoints' as *;
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+@use "@/styles/typography" as *;
+@use "@/styles/breakpoints" as *;
 
 // ═══════════════════════════════════════════════════════
 // HERO — FULL VIEWPORT, SOLID GRADIENT BACKGROUND
@@ -15,15 +15,22 @@
   position: relative;
   overflow: hidden;
   padding: 120px 0 $space-3xl;
-  background: linear-gradient(160deg, #e8eff6 0%, #dce6f0 35%, #d0dfee 70%, #c5d8ea 100%);
+  background: linear-gradient(
+    160deg,
+    #e8eff6 0%,
+    #dce6f0 35%,
+    #d0dfee 70%,
+    #c5d8ea 100%
+  );
   cursor: none; // hide default cursor on hero
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
     padding: 0;
   }
 
   // Restore cursor on interactive elements
-  a, button {
+  a,
+  button {
     cursor: pointer;
   }
 }
@@ -40,13 +47,19 @@
   pointer-events: none;
   z-index: 50;
   opacity: 0;
-  transition: opacity 0.3s ease, width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+  transition:
+    opacity 0.3s ease,
+    width 0.25s ease,
+    height 0.25s ease,
+    border-color 0.25s ease;
   will-change: transform;
   mix-blend-mode: screen;
 
-  box-shadow: 0 0 15px rgba($accent, 0.12), inset 0 0 15px rgba($accent, 0.06);
+  box-shadow:
+    0 0 15px rgba($accent, 0.12),
+    inset 0 0 15px rgba($accent, 0.06);
 
-  @include below('tablet') {
+  @include below("tablet") {
     display: none;
   }
 }
@@ -65,7 +78,7 @@
   transition: opacity 0.3s ease;
   will-change: transform;
 
-  @include below('tablet') {
+  @include below("tablet") {
     display: none;
   }
 }
@@ -87,7 +100,7 @@
   right: -250px;
   animation: blobFloat1 22s ease-in-out infinite;
 
-  @include below('tablet') {
+  @include below("tablet") {
     width: 500px;
     height: 500px;
     top: -150px;
@@ -104,7 +117,7 @@
   left: -250px;
   animation: blobFloat2 28s ease-in-out infinite;
 
-  @include below('tablet') {
+  @include below("tablet") {
     width: 400px;
     height: 400px;
     bottom: -180px;
@@ -122,7 +135,7 @@
   transform: translate(-50%, -50%);
   animation: blobFloat3 30s ease-in-out infinite;
 
-  @include below('tablet') {
+  @include below("tablet") {
     width: 300px;
     height: 300px;
   }
@@ -140,9 +153,23 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 25% 50%, rgba($accent, 0.05), transparent 70%),
-    radial-gradient(ellipse 50% 70% at 80% 20%, rgba($primary, 0.04), transparent 60%),
-    linear-gradient(180deg, rgba(#fff, 0.15) 0%, transparent 30%, transparent 70%, rgba($primary, 0.03) 100%);
+    radial-gradient(
+      ellipse 70% 50% at 25% 50%,
+      rgba($accent, 0.05),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 70% at 80% 20%,
+      rgba($primary, 0.04),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(#fff, 0.15) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba($primary, 0.03) 100%
+    );
 }
 
 // Diagonal line accent
@@ -152,25 +179,53 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba($primary, 0.04) 30%, rgba($accent, 0.12) 50%, rgba($primary, 0.04) 70%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba($primary, 0.04) 30%,
+    rgba($accent, 0.12) 50%,
+    rgba($primary, 0.04) 70%,
+    transparent 100%
+  );
 }
 
 @keyframes blobFloat1 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  25% { transform: translate(40px, -30px) rotate(6deg) scale(1.04); }
-  50% { transform: translate(-20px, 35px) rotate(-4deg) scale(0.96); }
-  75% { transform: translate(25px, 15px) rotate(3deg) scale(1.02); }
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(40px, -30px) rotate(6deg) scale(1.04);
+  }
+  50% {
+    transform: translate(-20px, 35px) rotate(-4deg) scale(0.96);
+  }
+  75% {
+    transform: translate(25px, 15px) rotate(3deg) scale(1.02);
+  }
 }
 
 @keyframes blobFloat2 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  33% { transform: translate(-30px, 20px) rotate(-5deg) scale(1.05); }
-  66% { transform: translate(25px, -25px) rotate(6deg) scale(0.95); }
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(-30px, 20px) rotate(-5deg) scale(1.05);
+  }
+  66% {
+    transform: translate(25px, -25px) rotate(6deg) scale(0.95);
+  }
 }
 
 @keyframes blobFloat3 {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.15); }
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
 }
 
 // ─── REALISTIC CITYSCAPE ────────────────────────────────
@@ -184,11 +239,11 @@
   opacity: 0;
   animation: skylineRise 1.5s ease-out 0.4s forwards;
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
     height: 300px;
   }
 
-  @include below('tablet') {
+  @include below("tablet") {
     height: 140px;
     opacity: 0;
   }
@@ -212,7 +267,7 @@
   z-index: 0;
 
   // ── HORIZONTAL lines ──
-  &[data-direction='h'] {
+  &[data-direction="h"] {
     left: 0;
     right: 0;
     height: 1px;
@@ -227,7 +282,7 @@
 
     // Traveling light pulse
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: -30%;
@@ -245,22 +300,35 @@
     }
 
     // Stagger each line
-    &:nth-child(5) { // 1st horizontal (index after orbs+grid+gradient)
-      &::after { animation-delay: 0s; animation-duration: 7s; }
+    &:nth-child(5) {
+      // 1st horizontal (index after orbs+grid+gradient)
+      &::after {
+        animation-delay: 0s;
+        animation-duration: 7s;
+      }
     }
     &:nth-child(6) {
-      &::after { animation-delay: -2s; animation-duration: 9s; }
+      &::after {
+        animation-delay: -2s;
+        animation-duration: 9s;
+      }
     }
     &:nth-child(7) {
-      &::after { animation-delay: -4.5s; animation-duration: 11s; }
+      &::after {
+        animation-delay: -4.5s;
+        animation-duration: 11s;
+      }
     }
     &:nth-child(8) {
-      &::after { animation-delay: -1s; animation-duration: 8s; }
+      &::after {
+        animation-delay: -1s;
+        animation-duration: 8s;
+      }
     }
   }
 
   // ── VERTICAL lines ──
-  &[data-direction='v'] {
+  &[data-direction="v"] {
     top: 0;
     bottom: 0;
     width: 1px;
@@ -275,7 +343,7 @@
 
     // Traveling light pulse
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: -30%;
@@ -294,28 +362,48 @@
 
     // Stagger each line
     &:nth-child(9) {
-      &::after { animation-delay: 0s; animation-duration: 9s; }
+      &::after {
+        animation-delay: 0s;
+        animation-duration: 9s;
+      }
     }
     &:nth-child(10) {
-      &::after { animation-delay: -3s; animation-duration: 12s; }
+      &::after {
+        animation-delay: -3s;
+        animation-duration: 12s;
+      }
     }
     &:nth-child(11) {
-      &::after { animation-delay: -6s; animation-duration: 10s; }
+      &::after {
+        animation-delay: -6s;
+        animation-duration: 10s;
+      }
     }
     &:nth-child(12) {
-      &::after { animation-delay: -1.5s; animation-duration: 11s; }
+      &::after {
+        animation-delay: -1.5s;
+        animation-duration: 11s;
+      }
     }
   }
 }
 
 @keyframes lineSlideH {
-  0% { left: -30%; }
-  100% { left: 100%; }
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 @keyframes lineSlideV {
-  0% { top: -30%; }
-  100% { top: 100%; }
+  0% {
+    top: -30%;
+  }
+  100% {
+    top: 100%;
+  }
 }
 
 // ─── CONTAINER ──────────────────────────────────────────
@@ -327,13 +415,17 @@
   position: relative;
   z-index: 1;
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    gap: $space-3xl;
+    gap: 0;
     min-height: 100vh;
-    padding-top: 80px;
+    width: 1440px;
+    padding-top: 140px;
     padding-bottom: $space-2xl;
+    padding-left: $container-px-desktop;
+    padding-right: 0;
   }
 }
 
@@ -345,16 +437,18 @@
   flex: 1;
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+  transition:
+    opacity 0.9s ease-out,
+    transform 0.9s ease-out;
 
   &.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  @include respond-to('desktop') {
-    flex: 0 0 50%;
-    max-width: 50%;
+  @include respond-to("desktop") {
+    flex: 0 0 48%;
+    max-width: 48%;
   }
 }
 
@@ -394,11 +488,11 @@
   max-width: 620px;
   font-size: 40px;
 
-  @include respond-to('tablet') {
+  @include respond-to("tablet") {
     font-size: 50px;
   }
 
-  @include respond-to('wide') {
+  @include respond-to("wide") {
     font-size: 58px;
   }
 }
@@ -410,7 +504,7 @@
 
   // Hand-drawn pencil stroke underline
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: -2%;
@@ -422,7 +516,7 @@
     z-index: -1;
     animation: underlineDraw 1s ease-out 0.8s both;
 
-    @include respond-to('desktop') {
+    @include respond-to("desktop") {
       height: 18px;
       bottom: -6px;
     }
@@ -430,7 +524,7 @@
 
   // Subtle highlight behind the word
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: -2%;
@@ -463,7 +557,7 @@
   max-width: 500px;
   margin-bottom: $space-xl;
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
     font-size: 18px;
   }
 }
@@ -487,7 +581,7 @@
   border-top: 1px solid rgba($primary, 0.15);
   flex-wrap: wrap;
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
     gap: $space-xl;
   }
 }
@@ -528,7 +622,7 @@
   height: 32px;
   background-color: rgba($primary, 0.15);
 
-  @include below('tablet') {
+  @include below("tablet") {
     display: none;
   }
 }
@@ -542,16 +636,18 @@
   position: relative;
   opacity: 0;
   transform: translateY(40px) scale(0.97);
-  transition: opacity 0.9s ease-out 0.2s, transform 0.9s ease-out 0.2s;
+  transition:
+    opacity 0.9s ease-out 0.2s,
+    transform 0.9s ease-out 0.2s;
 
   &.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 
-  @include respond-to('desktop') {
-    flex: 0 0 47%;
-    max-width: 47%;
+  @include respond-to("desktop") {
+    flex: 0 0 48%;
+    max-width: 48%;
   }
 }
 
@@ -568,13 +664,19 @@
 
   // Accent top line
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, $accent, rgba($accent, 0.4) 40%, rgba(#0ea5e9, 0.5) 80%, $accent);
+    background: linear-gradient(
+      90deg,
+      $accent,
+      rgba($accent, 0.4) 40%,
+      rgba(#0ea5e9, 0.5) 80%,
+      $accent
+    );
     z-index: 3;
   }
 }
@@ -585,7 +687,7 @@
   aspect-ratio: 16 / 10;
   background-color: var(--surface-alt);
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
     aspect-ratio: 4 / 3;
   }
 }
@@ -683,7 +785,7 @@
   backdrop-filter: blur(16px);
   border-top: 1px solid rgba(#fff, 0.08);
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
     gap: $space-xl;
     padding: $space-md $space-2xl;
   }
@@ -703,7 +805,7 @@
   color: #fff;
   line-height: 1.2;
 
-  @include respond-to('desktop') {
+  @include respond-to("desktop") {
     font-size: 20px;
   }
 }
@@ -733,7 +835,7 @@
   opacity: 0;
   animation: badgeAppear 0.5s ease-out 1s forwards;
 
-  @include below('tablet') {
+  @include below("tablet") {
     top: -14px;
     right: $space-md;
   }
@@ -763,7 +865,7 @@
   transform: rotate(15deg);
   z-index: -1;
 
-  @include below('tablet') {
+  @include below("tablet") {
     width: 80px;
     height: 80px;
     bottom: -20px;
